@@ -1,3 +1,7 @@
 body {
     background: url('../img/bg.gif');
 }
+
+h1 {
+    color: green;
+}
