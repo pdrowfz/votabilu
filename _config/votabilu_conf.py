@@ -12,6 +12,10 @@ CHERRYPY_CONFIG = {
         'server.socket_host': '0.0.0.0',
         'server.socket_port': 80,
     },
+    '/': {
+        'tools.staticdir.root': STATIC_DIR,
+        'tools.sessions.on': True,
+    },
     '/css': {
         'tools.staticdir.on': True,
         'tools.staticdir.dir': 'css',
