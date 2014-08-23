@@ -9,6 +9,14 @@ import redis
 
 env = Environment(loader = FileSystemLoader('static'))
 
+
+def get_ranking():
+    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    ranking = {}
+    for e in r.zrange('hof', 0, 9):
+        ranking[e] = r.zscore('hof', e)
+    return ranking
+
 class VotaBilu(object):
     @cherrypy.expose
     def index(self):
@@ -18,17 +26,18 @@ class VotaBilu(object):
     @cherrypy.expose
     def hof(self):
         tmpl = env.get_template('hof.html')
+        ranking = get_ranking()
         return tmpl.render(title = 'Hall of Fame',
-            n1 = 'HNN', s1 = '666',
-            n2 = 'HNN', s2 = '666',
-            n3 = 'HNN', s3 = '666',
-            n4 = 'HNN', s4 = '666',
-            n5 = 'HNN', s5 = '666',
-            n6 = 'HNN', s6 = '666',
-            n7 = 'HNN', s7 = '666',
-            n8 = 'HNN', s8 = '666',
-            n9 = 'HNN', s9 = '666',
-            n10 = 'HNN', s10 = '666')
+            n1 = ranking.keys()[0], s1 = str(ranking[ranking.keys()[0]]),
+            n2 = ranking.keys()[1], s2 = str(ranking[ranking.keys()[1]]),
+            n3 = ranking.keys()[2], s3 = str(ranking[ranking.keys()[2]]),
+            n4 = ranking.keys()[3], s4 = str(ranking[ranking.keys()[3]]),
+            n5 = ranking.keys()[4], s5 = str(ranking[ranking.keys()[4]]),
+            n6 = ranking.keys()[5], s6 = str(ranking[ranking.keys()[5]]),
+            n7 = ranking.keys()[6], s7 = str(ranking[ranking.keys()[6]]),
+            n8 = ranking.keys()[7], s8 = str(ranking[ranking.keys()[7]]),
+            n9 = ranking.keys()[8], s9 = str(ranking[ranking.keys()[8]]),
+            n10 = ranking.keys()[9], s10 = str(ranking[ranking.keys()[9]]))
 
     def get_random_candidate(sorteds = None):
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
@@ -37,12 +46,6 @@ class VotaBilu(object):
             candidate = r.srandmember('candidatos:SP')
         return candidate
 
-    def get_ranking():
-        r = redis.StrictRedis(host='localhost', port=6379, db=0)
-        ranking = {}
-        for e in r.zrange('hof', 0, 9):
-            ranking[e] = r.zscore('hof', e)
-        return ranking
 
     def insert_in_ranking(name, score):
         pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
