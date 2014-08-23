@@ -17,6 +17,25 @@ def get_ranking():
         ranking[e] = r.zscore('hof', e)
     return ranking
 
+def get_random_candidate(sorteds = None):
+    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    candidate = r.srandmember('candidatos:SP')
+    while candidate in sorteds:
+        candidate = r.srandmember('candidatos:SP')
+    return candidate
+
+
+def insert_in_ranking(name, score):
+    pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
+    r = redis.Redis(connection_pool=pool)
+    if r.zcount('hof', score, 1000000000) == 0:
+        return False
+    else:
+        if r.zadd('hof', name, score) == 1:
+            r.zremrangebyrank('hof', -1, -1)
+        return True
+
+
 class VotaBilu(object):
     @cherrypy.expose
     def index(self):
@@ -38,24 +57,6 @@ class VotaBilu(object):
             n8 = ranking.keys()[7], s8 = str(ranking[ranking.keys()[7]]),
             n9 = ranking.keys()[8], s9 = str(ranking[ranking.keys()[8]]),
             n10 = ranking.keys()[9], s10 = str(ranking[ranking.keys()[9]]))
-
-    def get_random_candidate(sorteds = None):
-        r = redis.StrictRedis(host='localhost', port=6379, db=0)
-        candidate = r.srandmember('candidatos:SP')
-        while candidate in sorteds:
-            candidate = r.srandmember('candidatos:SP')
-        return candidate
-
-
-    def insert_in_ranking(name, score):
-        pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
-        r = redis.Redis(connection_pool=pool)
-        if r.zcount('hof', score, 1000000000) == 0:
-            return False
-        else:
-            if r.zadd('hof', name, score) == 1:
-                r.zremrangebyrank('hof', -1, -1)
-            return True
 
 
 cherrypy.quickstart(VotaBilu(), '/', config.CHERRYPY_CONFIG)
