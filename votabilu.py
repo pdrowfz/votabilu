@@ -30,12 +30,13 @@ class VotaBilu(object):
         return ranking
 
     def insert_in_ranking(name, score):
-        r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
+        r = redis.Redis(connection_pool=pool)
         if r.zcount('hof', score, 1000000000) == 0:
             return False
         else:
-            r.zremrangebyrank('hof', -1, -1)
-            r.zadd('hof', name=score)
+            if r.zadd('hof', name, score) == 1:
+                r.zremrangebyrank('hof', -1, -1)
             return True
 
 
