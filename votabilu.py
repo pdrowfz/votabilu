@@ -84,7 +84,7 @@ class VotaBilu(object):
             n7 = "Huguinho", s7 = 500000,
             n8 = "Bolinha", s8 = 400000,
             n9 = "Carol", s9 = 300000,
-            n10 = "Gugu", s10 = 200000
+            n10 = "Gugu", s10 = 200000)
 
 
 cherrypy.quickstart(VotaBilu(), '/', config.CHERRYPY_CONFIG)
