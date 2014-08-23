@@ -6,6 +6,14 @@ $(function() {
         score = getCookie('score');
         vidas = getCookie('vidas');
     }
+
+    var intVidas = parseInt(vidas);
+    if(intVidas != 4) {
+        for(var i = intVidas + 1; i <= 4; i++) {
+            $('#vida' + i).css('visibility', 'hidden');
+        }
+    }
+
     $('#pontos').html(score);
     var count = 5;
     $('#maisdicas').click(function() {
@@ -23,6 +31,16 @@ $(function() {
             setCookie('score',intScore,1);
             setCookie('vidas',vidas,1);
             location.reload();
+        } else {
+            if(vidas != 1) {
+                var intVidas = parseInt(vidas);
+                intVidas--;
+                $('#vida' + vidas).css('visibility', 'hidden');
+                vidas = intVidas;
+                setCookie('vidas',intVidas,1);
+            } else {
+                window.location.href = "/hof";
+            }
         }
     });
 });
