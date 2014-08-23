@@ -54,3 +54,8 @@ body {
 #dica5, #dica6, #dica7 {
   visibility: hidden;
 }
+
+.col-md-8 {
+    color: white;
+}
+
