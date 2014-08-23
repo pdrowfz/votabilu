@@ -15,8 +15,12 @@ class VotaBilu(object):
         tmpl = env.get_template('index.html')
         return tmpl.render(title = 'Vota, Bilu!')
 
-    def get_candidate():
+    def get_random_candidate(sorteds = None):
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
-        return r.srandmember('candidatos:SP')
+        candidate = r.srandmember('candidatos:SP')
+        while candidate in sorteds:
+            candidate = r.srandmember('candidatos:SP')
+        return candidate
+
 
 cherrypy.quickstart(VotaBilu(), '/', config.CHERRYPY_CONFIG)
