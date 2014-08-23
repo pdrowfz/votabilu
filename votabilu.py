@@ -22,5 +22,21 @@ class VotaBilu(object):
             candidate = r.srandmember('candidatos:SP')
         return candidate
 
+    def get_ranking():
+        r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        ranking = {}
+        for e in r.zrange('hof', 0, 9):
+            ranking[e] = r.zscore('hof', e)
+        return ranking
+
+    def insert_in_ranking(name, score):
+        r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        if r.zcount('hof', score, 1000000000) == 0:
+            return False
+        else:
+            r.zremrangebyrank('hof', -1, -1)
+            r.zadd('hof', name=score)
+            return True
+
 
 cherrypy.quickstart(VotaBilu(), '/', config.CHERRYPY_CONFIG)
