@@ -3,6 +3,7 @@
 
 import cherrypy
 from _config import votabilu_conf as config
+from _config import secrets as secret
 from os import path
 from jinja2 import Environment, FileSystemLoader
 import redis
@@ -23,6 +24,14 @@ def get_random_candidate(sorteds = None):
     while candidate in sorteds:
         candidate = r.srandmember('candidatos:SP')
     return candidate
+
+def get_candidate(candidate_id):
+    token = secret.token
+    headers = {'content-type': 'application/json', 'App-Token': token, 'Accept': 'application/json'}
+    url_base = 'http://api.transparencia.org.br/api/v1/'
+    page = 0
+    candidatos = requests.get(url_base + 'candidatos/' + candidate_id, headers=headers)
+    return candidatos.json()
 
 
 def insert_in_ranking(name, score):
