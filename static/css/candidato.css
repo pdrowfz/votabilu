@@ -1,0 +1,16 @@
+#caixa_texto .small-8 {
+  padding: 6px;
+  position:float;
+  bottom: 0px;
+}
+
+#header {
+  background-color: black;
+}
+
+#pular {
+  position: relative;
+
+  left:35%;
+
+}
