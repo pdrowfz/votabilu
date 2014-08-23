@@ -75,16 +75,16 @@ class VotaBilu(object):
         tmpl = env.get_template('hof.html')
         ranking = get_ranking()
         return tmpl.render(title = 'Hall of Fame',
-            n1 = ranking.keys()[0], s1 = str(ranking[ranking.keys()[0]]),
-            n2 = ranking.keys()[1], s2 = str(ranking[ranking.keys()[1]]),
-            n3 = ranking.keys()[2], s3 = str(ranking[ranking.keys()[2]]),
-            n4 = ranking.keys()[3], s4 = str(ranking[ranking.keys()[3]]),
-            n5 = ranking.keys()[4], s5 = str(ranking[ranking.keys()[4]]),
-            n6 = ranking.keys()[5], s6 = str(ranking[ranking.keys()[5]]),
-            n7 = ranking.keys()[6], s7 = str(ranking[ranking.keys()[6]]),
-            n8 = ranking.keys()[7], s8 = str(ranking[ranking.keys()[7]]),
-            n9 = ranking.keys()[8], s9 = str(ranking[ranking.keys()[8]]),
-            n10 = ranking.keys()[9], s10 = str(ranking[ranking.keys()[9]]))
+            n1 = "Eneas", s1 = 1000000000000,
+            n2 = "Bilu", s2 = 10000000000,
+            n3 = "Minion", s3 = 10000000000,
+            n4 = "Plinio", s4 = 100000000,
+            n5 = "Pedrinho", s5 = 10000000,
+            n6 = "Poo", s6 = 1000000,
+            n7 = "Huguinho", s7 = 500000,
+            n8 = "Bolinha", s8 = 400000,
+            n9 = "Carol", s9 = 300000,
+            n10 = "Gugu", s10 = 200000
 
 
 cherrypy.quickstart(VotaBilu(), '/', config.CHERRYPY_CONFIG)
