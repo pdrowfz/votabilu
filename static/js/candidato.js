@@ -24,6 +24,19 @@ $(function() {
         return false;
     });
 
+    $('#pular').click(function() {
+        if(vidas != 1) {
+            var intVidas = parseInt(vidas);
+            intVidas--;
+            $('#vida' + vidas).css('visibility', 'hidden');
+            vidas = intVidas;
+            setCookie('vidas',intVidas,1);
+            window.location.reload();
+        } else {
+            window.location.href = "/hof";
+        }
+    });
+
     $('#enviar').click(function() {
         if($('#name').val() == $('#resposta').html()) {
             var intScore = parseInt(score)
