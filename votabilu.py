@@ -7,6 +7,7 @@ from _config import secrets as secret
 from os import path
 from jinja2 import Environment, FileSystemLoader
 import redis
+import requests
 
 env = Environment(loader = FileSystemLoader('static'))
 
@@ -54,7 +55,20 @@ class VotaBilu(object):
     @cherrypy.expose
     def play(self):
         tmpl = env.get_template('candidato.html')
-        return tmpl.render()
+        candidato = get_candidate(get_random_candidate([]))
+        if 'miniBio' in candidato.keys():
+            minibio = candidato['miniBio']
+        else:
+            minibio = 'Candidato nao tem minibio.'
+        return tmpl.render(foto = candidato['foto'],
+            dica1 = minibio,
+            dica2 = 'Idade: ' + candidato['idade'] + ' anos',
+            dica3 = 'Instrucao: ' + candidato['instrucao'],
+            dica4 = 'Ocupacao: ' + candidato['ocupacao'],
+            dica5 = 'Partido: ' + candidato['partido'],
+            dica6 = 'Cargo: ' + candidato['cargo'],
+            dica7 = 'Letras do nome: ' + candidato['apelido'].upper(),
+            name = candidato['apelido'])
 
     @cherrypy.expose
     def hof(self):

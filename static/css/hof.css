@@ -2,7 +2,12 @@ body {
     background: url('../img/bg.gif');
 }
 
-h1 {
+h2 {
     color: yellow;
     font-family: 'Orbitron', sans-serif;
+}
+
+img {
+    width: 50%;
+    height: 50%;
 }

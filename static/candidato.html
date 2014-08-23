@@ -4,8 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
-
     <title>Vota, Bilu!</title>
 
     <link rel="icon" type="image/png" href="img/favicon.png">
@@ -15,6 +13,7 @@
 
   </head>
   <body>
+  <div id="resposta">{{ name }}</div>
   <div class="container">
         <div class="row" id="header">
 
@@ -22,23 +21,20 @@
           <img src="img/logo.png" id="logo">
         </div>
 
-
-          <div class="col-md-1" > 
-            <img src="img/vidas.png" id="vida">
+          <div class="col-xs-1 col-md-1"> 
+            <img src="img/vidas.png" id="vida1">
           </div>
-          <div class="col-md-1" > 
-            <img src="img/vidas.png" id="vida">
+          <div class="col-xs-1 col-md-1"> 
+            <img src="img/vidas.png" id="vida2">
           </div>
-          <div class="col-md-1" > 
-            <img src="img/vidas.png" id="vida">
+          <div class="col-xs-1 col-md-1"> 
+            <img src="img/vidas.png" id="vida3">
           </div>
-          <div class="col-md-1" > 
-            <img src="img/vidas.png" id="vida">
+          <div class="col-xs-1  col-md-1"> 
+            <img src="img/vidas.png" id="vida4">
           </div>
 
-
-
-        <div class="col-md-4" id="pontos"> 0</div>
+        <div class="col-md-4" id="pontos">0</div>
 
         </div><!--/.nav-collapse -->
     </div>
@@ -46,104 +42,50 @@
     <div class="container">
         <div class="row">
 
-        <div class="col-md-4">
-          <img src="" class="img-thumbnail" id="profile">
+        <div class="col-md-2">
+          <img src={{ foto }} class="img-thumbnail" id="profile">
         </div>
 
-        <div class="col-md-8"> Dicas</div>
+        <div class="col-md-8" id="dica1">{{ dica1 }}</div>
+        <div class="col-md-8" id="dica2">{{ dica2 }}</div>
+        <div class="col-md-8" id="dica3">{{ dica3 }}</div>
+        <div class="col-md-8" id="dica4">{{ dica4 }}</div>
+        <div class="col-md-8" id="dica5">{{ dica5 }}</div>
+        <div class="col-md-8" id="dica6">{{ dica6 }}</div>
+        <div class="col-md-8" id="dica7">{{ dica7 }}</div>
 
         </div><!--/.nav-collapse -->
     </div>
 
       <div class="container"> 
         <div class="input-group">
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" id="name">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Enviar!</button>
+                <button class="btn btn-default" type="button" id="enviar">Enviar!</button>
               </span>
         </div>
       </div>
 
     <div class="container">
-            <button class="btn btn-lg btn-default" id="mais_dicas">Quero mais dicas!</button>     
+        <div class="row">
+            <div class="col-xs-0 col-md-3"></div>
+            <div class="text-center col-xs-6 col-md-2">
+                <a href="/play" id="maisdicas" class="btn btn-success btn-lg btn-block">
+                    Mais dicas
+                </a>
+            </div>
+            <div class="col-xs-0 col-md-2"></div>
+            <div class="text-center col-xs-6 col-md-2">
+                <a href="#" class="btn btn-danger btn-lg btn-block">
+                    Pular
+                </a>
+            </div>
+            <div class="col-xs-0 col-md-3"></div>
+        </div>
     </div>
-
-    <div class="container" > 
-      <div class="col-md-12"id="mais_dicas">    Dicas Adicionais
-      </div>
-    </div>
-
-    <div class="container"> 
-    
-      <div class="col-md-12" id="pular">
-        <button class="btn btn-lg btn-default" >Pular</button>  
-      </div>
-    </div>
-    <!--
-
-
-    <div class="row">
-      <div class="large-12 columns">
-        <div class="large-6 columns">Vidas </div>
-        <div class="large-6 columns">Score</div>
-      </div>
-    </div>
-
-    <div class="row">
-    <div class="large-12 columns">
-      <div class="small-4 columns">Foto</div>
-      <div class="small-8 columns">Dicas</div>
-    </div>
-    </div>
-
-
-
-    <div class="row" id="caixa_texto">
-    <div class="large-12 columns">
-
-      <div class="small-8 columns">
-        <input type="text" placeholder="Nome do Candidato">
-      </div>
-
-      <div class="small-4 columns">  
-        <div class="button round expand">Enviar</div>
-      </div>
-    </div>
-    </div>
-    
-
-    <div class="row">
-    <div class="large-12 columns">
-      <div class="secundary expand button">
-      Socilitar mais dicas
-      </div>
-      
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="large-12 columns">
-    Dicas Adcionais
-    </div>
-    <div class="large-12 columns">
-    Dica 1
-    </div>
-    <div class="large-12 columns">
-    Dica 2
-    </div>
-    </div>
-
-    <div class="row">
-      <div class="large-12 columns">
-
-      <div class="small-4 columns" id="pular">
-      <div class="button expand">Pular</div>
-      </div>
-      </div>
-    </div>
-
-
- -->
+  </div>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/js/candidato.js"></script>
+  </body>
 </html>
