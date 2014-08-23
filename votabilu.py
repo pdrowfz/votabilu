@@ -16,6 +16,11 @@ class VotaBilu(object):
         return tmpl.render(title = 'Vota, Bilu!')
 
     @cherrypy.expose
+    def play(self):
+        tmpl = env.get_template('candidato.html')
+        return tmpl.render()
+
+    @cherrypy.expose
     def hof(self):
         tmpl = env.get_template('hof.html')
         return tmpl.render(title = 'Hall of Fame',
